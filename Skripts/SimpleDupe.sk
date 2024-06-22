@@ -1,0 +1,28 @@
+#SimpleDupe By SmartPotatoes | Version 1.0 | 06-22-2024
+
+options:
+    MaxDupeTimes: 5 #The Max Number of times you can do when doing /dupe [<number>] (Must be more than 1)
+    BlacklistedItems: barrier and red dye named "&cLifesteal Heart" #Blacklisted items you don't want players be able to dupe
+    CommandCooldown: 5 seconds #How long should the player have to wait between using the /dupe command.
+    Color: <##2f7991> #The color of the prefix and other in some messages
+
+# -- DO NOT EDIT BELOW THIS LINE ---------------------------------------------------------------------------------------------
+
+command /dupe <number=1>:
+    prefix: smartskripts
+    cooldown: {@CommandCooldown}
+    cooldown message: {@Color}&lDUPE &cYou must wait to dupe again!
+    usage: {@Color}&lDUPE &cInvalid usage: /dupe [<times>]
+    trigger:
+        if player's tool is air:
+            cancel the cooldown
+            send "{@Color}&lDUPE &cYou must hold something to dupe!" to player
+        else if round(arg-1) > {@MaxDupeTimes}:
+            cancel the cooldown
+            send "{@Color}&lDUPE &cYou can only dupe {@MaxDupeTimes}x times at a time!" to player
+        else if {@BlacklistedItems} contains player's tool:
+            cancel the cooldown
+            send "{@Color}&lDUPE &cYou cannot dupe blacklisted items!" to player
+        else:
+            give item amount of player's tool*round(arg-1) of player's tool to player
+            send "{@Color}&lDUPE &fYou duped your held item {@Color}%round(arg-1)%x &ftimes." to player
