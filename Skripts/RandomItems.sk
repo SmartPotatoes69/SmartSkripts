@@ -1,7 +1,8 @@
-#RandomItems By SmartPotatoes | Version 1.0 | Jun 23, 2024
+#RandomItems By SmartPotatoes | Version 1.1 | Jun 23, 2024
 
 options:
     BlacklistedItems: barrier and bedrock #Blacklisted items you don't want players be able to get
+    CustomRandomItems: diamond named "&bRich Crystal" and dirt of mending named "<##964B00>Poor Crystal" #Add your own items to random items
     IntervelForItems: 5 seconds #How often should online players get a random item
     actionbaralert: true #If u want a alert in the actionbar everytime u get a item
     Color: <##2f7991> #The color of the prefix and other in some messages
@@ -11,7 +12,7 @@ options:
 
 on load:
     clear {-RandomItemsList::*}
-    set {-RandomItemsList::*} to all items
+    set {-RandomItemsList::*} to all items and {@CustomRandomItems}
     remove {@BlacklistedItems} and air from {-RandomItemsList::*}
 
 on join:
