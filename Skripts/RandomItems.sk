@@ -1,0 +1,39 @@
+#RandomItems By SmartPotatoes | Version 1.0 | Jun 23, 2024
+
+options:
+    BlacklistedItems: barrier and bedrock #Blacklisted items you don't want players be able to get
+    IntervelForItems: 5 seconds #How often should online players get a random item
+    actionbaralert: true #If u want a alert in the actionbar everytime u get a item
+    Color: <##2f7991> #The color of the prefix and other in some messages
+
+# -- DO NOT EDIT BELOW THIS LINE ---------------------------------------------------------------------------------------------
+
+
+on load:
+    clear {-RandomItemsList::*}
+    set {-RandomItemsList::*} to all items
+    remove {@BlacklistedItems} and air from {-RandomItemsList::*}
+
+on join:
+    while player is connected:
+        if {RandomItemsDisabled::*} doesn't contain player's uuid:
+            set {_item} to random element out of {-RandomItemsList::*}
+            if player can hold {_item}:
+                give {_item} to player
+            else:
+                drop {_item} at player's location without velocity
+            send action bar "{@Color}You got %{_item}% from random items!" to player if {@actionbaralert} is true
+        wait {@IntervelForItems}
+
+#Note: this is per player
+command /togglerandomitems:
+    prefix: smartskripts
+    aliases: toggleitems
+    usage: {@Color}&lRANDOMITEMS &cInvalid usage: /togglerandomitems
+    trigger:
+        if {RandomItemsDisabled::*} contains player's uuid:
+            remove player's uuid from {RandomItemsDisabled::*}
+            send "{@Color}&lRANDOMITEMS &fYou have &aenabled &frandom items." to player
+        else:
+            add player's uuid to {RandomItemsDisabled::*}
+            send "{@Color}&lRANDOMITEMS &fYou have &cdisabled &frandom items." to player
