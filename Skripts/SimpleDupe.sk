@@ -1,4 +1,4 @@
-#SimpleDupe By SmartPotatoes | Version 1.0 | 06-22-2024
+#SimpleDupe By SmartPotatoes | Version 1.0 | Jun 22, 2024
 
 options:
     MaxDupeTimes: 5 #The Max Number of times you can do when doing /dupe [<number>] (Must be more than 1)
