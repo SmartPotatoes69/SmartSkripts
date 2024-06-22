@@ -1,5 +1,5 @@
 # SmartSkripts
-All of the public skripts i've made.   
+You may find some simple and more advanced skripts here.   
 
 You can use them hower you want.
 
